@@ -12,6 +12,9 @@
         MinWidth="700"
         Icon="Assets\smile.ico">
     <Window.Resources>
+
+        <local:BordeConverter x:Key="bordeConverter" />
+
         <Style TargetType="TextBlock"
                x:Key="etiquetaCampo">
             <Setter Property="Margin"
@@ -69,7 +72,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
-
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -121,13 +123,21 @@
             </Grid>
             <Border Background="#FFF3D2D2"
                     BorderBrush="Black"
-                    Margin="10">
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Height="{Binding ElementName=altoSlider, Path=Value}"
+                    Width="{Binding ElementName=anchoSlider, Path=Value}"
+                    BorderThickness="{Binding ElementName=bordeCheckBox, Path=IsChecked, Converter={StaticResource bordeConverter}}">
                 <Grid>
-                    <Image Stretch="Fill" />
+                    <Image Stretch="Fill"
+                           Source="{Binding ElementName=imagenTextBox, Path=Text}" />
+
                     <TextBlock Style="{StaticResource textoMeme}"
-                               VerticalAlignment="Top"></TextBlock>
+                               VerticalAlignment="Top"
+                               Text="{Binding ElementName=superiorTextBox, Path=Text}" />
                     <TextBlock Style="{StaticResource textoMeme}"
-                               VerticalAlignment="Bottom"></TextBlock>
+                               VerticalAlignment="Bottom"
+                               Text="{Binding ElementName=inferiorTextBox, Path=Text}" />
                 </Grid>
             </Border>
         </StackPanel>
